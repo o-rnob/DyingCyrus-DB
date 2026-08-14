@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this database, please cite it as below."
+title: "DyingCyrus-DB: A SQLite Financial Database for 11 DSE-Listed Bangladeshi Banks (2015-2025)"
+authors:
+  - family-names: "Hasan Ornob"
+    given-names: "K. M. Miad"
+    alias: "Ow1nomics"
+date-released: 2026-08-15
+url: "https://github.com/o-rnob/Datanest"
+repository-code: "https://github.com/o-rnob/Datanest"
+license: MIT
+keywords:
+  - Bangladesh banking sector
+  - Dhaka Stock Exchange
+  - financial database
+  - SQLite
+  - banking data quality
