@@ -1,0 +1,42 @@
+segment,metric_std,canonical_unit,n_banks,n_values,raw_labels
+CB,car_pct,%,11,128,CRAR % (Group) | Capital Adequacy Ratio %
+CB,cost_income_pct,%,11,125,Cost-to-Income Ratio % | Cost-to-Income Ratio % (Group)
+CB,eps,BDT,11,128,EPS | EPS (Taka)
+CB,loan_deposit_ratio_pct,%,11,127,Loan-Deposit Ratio %
+CB,loans_advances_gross,Tk mn,11,129,"Loans & Advances | Loans & Advances, gross"
+CB,net_interest_income,Tk mn,11,122,Net Interest Income
+CB,net_profit_after_tax,Tk mn,11,128,Net Profit After Tax
+CB,non_interest_income,Tk mn,11,122,Non-Interest Income
+CB,npl_amount,Tk mn,11,127,Estimated NPL amount | Estimated NPL amount (NPL% x Loans) | NPL amount
+CB,npl_pct_gross,%,11,127,NPL % (gross)
+CB,npl_to_assets_pct,%,11,127,NPL / Total Assets % | NPL / Total Assets % (estimated)
+CB,provision_coverage_pct,%,11,118,Provision Coverage %
+CB,roa_pct,%,11,127,ROA %
+CB,roe_pct,%,11,128,ROE %
+CB,shareholders_equity,Tk mn,11,127,Shareholders' Equity
+CB,total_assets,Tk mn,11,129,Total Assets
+CB,total_deposits,Tk mn,11,129,Total Deposits
+CB,yoy_equity_growth_pct,%,10,107,YoY Equity growth %
+CB,yoy_npat_growth_pct,%,11,122,YoY NPAT growth %
+CB,yoy_total_assets_growth_pct,%,1,10,YoY Total Assets growth %
+SOCB,car_pct,%,6,95,Capital Adequacy Ratio %
+SOCB,cost_income_pct,%,6,79,Cost-to-Income Ratio %
+SOCB,eps,BDT,6,83,EPS
+SOCB,loan_deposit_ratio_pct,%,6,216,Loan-Deposit Ratio %
+SOCB,loans_advances_gross,Tk mn,6,216,"Loans & Advances, gross"
+SOCB,net_interest_income,Tk mn,6,159,Net Interest Income
+SOCB,net_profit_after_tax,Tk mn,6,190,Net Profit After Tax
+SOCB,non_interest_income,Tk mn,6,159,Non-Interest Income
+SOCB,npl_amount,Tk mn,6,92,NPL amount
+SOCB,npl_pct_gross,%,6,93,NPL % (gross)
+SOCB,npl_to_assets_pct,%,6,92,NPL / Total Assets %
+SOCB,profit_before_tax,Tk mn,1,42,Profit Before Tax
+SOCB,provision_coverage_pct,%,6,91,Provision Coverage %
+SOCB,provision_maintained,Tk mn,1,12,Provision Maintained (Loans & Advances)
+SOCB,roa_pct,%,6,188,ROA %
+SOCB,roe_pct,%,6,190,ROE %
+SOCB,shareholders_equity,Tk mn,6,190,Shareholders' Equity
+SOCB,total_assets,Tk mn,6,188,Total Assets
+SOCB,total_deposits,Tk mn,6,216,Total Deposits
+SOCB,yoy_npat_growth_pct,%,6,185,YoY NPAT growth %
+SOCB,yoy_total_assets_growth_pct,%,6,186,YoY Total Assets growth %

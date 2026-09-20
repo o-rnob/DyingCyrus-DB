@@ -1,0 +1,100 @@
+bank_id,stat_name,value,source_row
+bank_asia_plc,Mean ROE % (2015-2025),9.586,4
+bank_asia_plc,Std Dev ROE % (2015-2025),1.689268086,5
+bank_asia_plc,"Sharpe-like ratio (rf=3%, full period)",3.898729902,6
+bank_asia_plc,Rolling mean ROE % (2019-2024 window),9.003333333,7
+bank_asia_plc,Rolling std dev ROE % (2019-2024),1.185523794,8
+bank_asia_plc,Rolling Sharpe-like ratio (2019-2024),5.063865747,9
+bank_asia_plc,Equity CAGR % (2015-2025),0.07076941124,10
+bank_asia_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-21.3,11
+bank_asia_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",0.5548484848,12
+brac_bank_plc,Mean ROE % (2015-2025),15.6,5
+brac_bank_plc,Std Dev ROE % (2015-2025),4.493410731,6
+brac_bank_plc,"Sharpe-like ratio (rf=3%, full period)",2.804106002,7
+brac_bank_plc,Rolling mean ROE % (2019-2024 window),12.785,8
+brac_bank_plc,Rolling std dev ROE % (2019-2024),2.972525862,9
+brac_bank_plc,Rolling Sharpe-like ratio (2019-2024),3.291813244,10
+brac_bank_plc,Equity CAGR % (2015-2025),0.1814625632,11
+brac_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-19.6,12
+brac_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",-0.1915454545,13
+city_bank_plc,Mean ROE % (2015-2025),16.72727273,4
+city_bank_plc,Std Dev ROE % (2015-2025),5.336120484,5
+city_bank_plc,"Sharpe-like ratio (rf=3%, full period)",2.572519262,6
+city_bank_plc,Rolling mean ROE % (2019-2024 window),16.36666667,7
+city_bank_plc,Rolling std dev ROE % (2019-2024),5.367556862,8
+city_bank_plc,Rolling Sharpe-like ratio (2019-2024),2.490270156,9
+city_bank_plc,Equity CAGR % (2015-2025),0.1132986914,10
+city_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-49.0,11
+city_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",-0.398,12
+dutch_bangla_bank_plc,Mean ROE % (2015-2025),0.1575454545,4
+dutch_bangla_bank_plc,Std Dev ROE % (2015-2025),0.03486649864,5
+dutch_bangla_bank_plc,"Sharpe-like ratio (rf=3%, full period)",3.65810906,6
+dutch_bangla_bank_plc,Rolling mean ROE % (2019-2024 window),0.1558333333,7
+dutch_bangla_bank_plc,Rolling std dev ROE % (2019-2024),0.0330418926,8
+dutch_bangla_bank_plc,Rolling Sharpe-like ratio (2019-2024),3.808296784,9
+dutch_bangla_bank_plc,Equity CAGR % (2015-2025),0.1361966277,10
+dutch_bangla_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-41.2,11
+dutch_bangla_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",0.1945454545,12
+eastern_bank_plc,Mean ROE % (2015-2025),15.333,4
+eastern_bank_plc,Std Dev ROE % (2015-2025),2.707820157,5
+eastern_bank_plc,"Sharpe-like ratio (rf=3%, full period)",4.554586083,6
+eastern_bank_plc,Rolling mean ROE % (2019-2024 window),16.335,7
+eastern_bank_plc,Rolling std dev ROE % (2019-2024),1.318313316,8
+eastern_bank_plc,Rolling Sharpe-like ratio (2019-2024),10.11519783,9
+eastern_bank_plc,Equity CAGR % (2015-2025),0.09512119525,10
+eastern_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",0.0,11
+eastern_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",-0.005627705628,12
+ific_bank_plc,Mean ROE % (2015-2025),-6.019090909,4
+ific_bank_plc,Std Dev ROE % (2015-2025),44.51236939,5
+ific_bank_plc,"Sharpe-like ratio (rf=3%, full period)",-0.2026198792,6
+ific_bank_plc,Rolling mean ROE % (2019-2024 window),6.085,7
+ific_bank_plc,Rolling std dev ROE % (2019-2024),5.451222799,8
+ific_bank_plc,Rolling Sharpe-like ratio (2019-2024),0.5659280704,9
+ific_bank_plc,Equity CAGR % (2015-2025),-0.07523732427,10
+ific_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-844.2,11
+ific_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",4.346909091,12
+mercantile_bank_plc,Mean ROE % (2015-2025),0.1064,4
+mercantile_bank_plc,Std Dev ROE % (2015-2025),0.04742840921,5
+mercantile_bank_plc,"Sharpe-like ratio (rf=3%, full period)",1.610848883,6
+mercantile_bank_plc,Rolling mean ROE % (2019-2024 window),0.09161666667,7
+mercantile_bank_plc,Rolling std dev ROE % (2019-2024),0.04040115922,8
+mercantile_bank_plc,Rolling Sharpe-like ratio (2019-2024),1.525121255,9
+mercantile_bank_plc,Equity CAGR % (2015-2025),0.05486343801,10
+mercantile_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-81.5,11
+mercantile_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",1.007,12
+mutual_trust_bank_plc,Mean ROE % (2015-2025),0.1351272727,5
+mutual_trust_bank_plc,Std Dev ROE % (2015-2025),0.02032102807,6
+mutual_trust_bank_plc,"Sharpe-like ratio (rf=3%, full period)",5.173324517,7
+mutual_trust_bank_plc,Rolling mean ROE % (2019-2024 window),0.1411666667,8
+mutual_trust_bank_plc,Rolling std dev ROE % (2019-2024),0.02084866103,9
+mutual_trust_bank_plc,Rolling Sharpe-like ratio (2019-2024),5.332077034,10
+mutual_trust_bank_plc,Equity CAGR % (2015-2025),0.04021888178,11
+mutual_trust_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-42.3,12
+mutual_trust_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",0.4746536797,13
+prime_bank_plc,Mean ROE % (2015-2025),11.27818182,4
+prime_bank_plc,Std Dev ROE % (2015-2025),5.569531072,5
+prime_bank_plc,"Sharpe-like ratio (rf=3%, full period)",1.486333717,6
+prime_bank_plc,Rolling mean ROE % (2019-2024 window),12.155,7
+prime_bank_plc,Rolling std dev ROE % (2019-2024),5.488390474,8
+prime_bank_plc,Rolling Sharpe-like ratio (2019-2024),1.668066447,9
+prime_bank_plc,Equity CAGR % (2015-2025),0.05794020094,10
+prime_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-43.0,11
+prime_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",-0.395,12
+pubali_bank_plc,Mean ROE % (2015-2025),0.10133,5
+pubali_bank_plc,Std Dev ROE % (2015-2025),0.05209813496,6
+pubali_bank_plc,"Sharpe-like ratio (rf=3%, full period)",1.3691469,7
+pubali_bank_plc,Rolling mean ROE % (2019-2024 window),0.11525,8
+pubali_bank_plc,Rolling std dev ROE % (2019-2024),0.03082977457,9
+pubali_bank_plc,Rolling Sharpe-like ratio (2019-2024),2.765184021,10
+pubali_bank_plc,Equity CAGR % (2015-2025),0.1197938344,11
+pubali_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-121.1,12
+pubali_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",-0.4655757576,13
+southeast_bank_plc,Mean ROE % (2015-2025),0.07301818182,4
+southeast_bank_plc,Std Dev ROE % (2015-2025),0.02913131711,5
+southeast_bank_plc,"Sharpe-like ratio (rf=3%, full period)",1.476698828,6
+southeast_bank_plc,Rolling mean ROE % (2019-2024 window),0.05935,7
+southeast_bank_plc,Rolling std dev ROE % (2019-2024),0.02451560727,8
+southeast_bank_plc,Rolling Sharpe-like ratio (2019-2024),1.197196532,9
+southeast_bank_plc,Equity CAGR % (2015-2025),0.02379280897,10
+southeast_bank_plc,"Max drawdown in NPAT %, 2015-2025 (peak-to-trough)",-85.9,11
+southeast_bank_plc,"Newey-West (HAC) trend regression: NPL% vs year, slope",0.6207272727,12

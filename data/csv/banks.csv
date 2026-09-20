@@ -1,0 +1,18 @@
+bank_id,display_name,sheet_name,bank_type,ownership,source_file,sheet_title,year_min,year_max,n_tables
+bank_asia_plc,Bank Asia PLC,Bank Asia Ltd,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,Bank Asia PLC  — Financial Dataset (2025 -2015),2015,2025,1
+brac_bank_plc,BRAC Bank PLC,BRAC Bank Ltd,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,Brac Bank LTD  — Financial Dataset (2025 -2015),2015,2025,1
+city_bank_plc,City Bank PLC,City Bank,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,City Bank PLC — Financial Dataset (2025- 2015),2015,2025,1
+dutch_bangla_bank_plc,Dutch-Bangla Bank PLC,Dutch-Bangla Bank PLC,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,Dutch Banlga Bank Ltd— Financial Dataset (2025 -2015),2015,2025,1
+eastern_bank_plc,Eastern Bank PLC,Eastern Bank Ltd,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,Eastern bank PLC  — Financial Dataset (2025 -2015),2015,2025,2
+ific_bank_plc,IFIC Bank PLC,IFIC Bank,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,IFIC Bank PLC — Financial Dataset (2025 -2015),2015,2025,1
+mercantile_bank_plc,Mercantile Bank PLC,Mercantile Bank Ltd,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,Mercantile Bank PLC — Financial Dataset (2025 -2015),2015,2025,1
+mutual_trust_bank_plc,Mutual Trust Bank PLC,Mutual Trust Bank,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,MTB-— Financial Dataset (2025 -2015),2015,2025,1
+prime_bank_plc,Prime Bank PLC,Prime Bank PLC,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,Prime Bank PLC — Financial Dataset (2025 -2015),2015,2025,1
+pubali_bank_plc,Pubali Bank PLC,Pubali Bank PLC,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,Pubali Bank PLC — Financial Dataset (2025 -2015),2016,2025,1
+southeast_bank_plc,Southeast Bank PLC,Southeast Bank PLC,CB,"Commercial bank (private, DSE-listed)",DATASET_11_BANKS_2025-2015_.xlsx,South East Bank PLC — Financial Dataset (2025 -2015),2015,2025,1
+bangladesh_development_bank_plc_bdbl,Bangladesh Development Bank PLC (BDBL),BDBL,SOCB,State-owned commercial / specialised bank,Dying_Cyrus_-_SOCB_V7__furnished_.xlsx,Bangladesh Development Bank PLC (BDBL) — Financial Dataset (2010- 2026),2010,2024,1
+bangladesh_krishi_bank_bkb,Bangladesh Krishi Bank (BKB),Krishi Bank,SOCB,State-owned commercial / specialised bank,Dying_Cyrus_-_SOCB_V7__furnished_.xlsx,Bangladesh Krishi Bank (BKB) — Financial Dataset (1973- 2026),2010,2026,1
+basic_bank_plc,BASIC Bank PLC,BASIC Bank,SOCB,State-owned commercial / specialised bank,Dying_Cyrus_-_SOCB_V7__furnished_.xlsx,BASIC Bank PLC — Financial Dataset (1989- 2026),1989,2024,1
+janata_bank_plc,Janata Bank PLC,Janata Bank,SOCB,State-owned commercial / specialised bank,Dying_Cyrus_-_SOCB_V7__furnished_.xlsx,Janata Bank PLC — Financial Dataset (1972- 2026),1972,2025,1
+rupali_bank_plc,Rupali Bank PLC,Rupali Bank ,SOCB,State-owned commercial / specialised bank,Dying_Cyrus_-_SOCB_V7__furnished_.xlsx,Rupali Bank PLC — Financial Dataset (1972- 2026),1972,2025,1
+sonali_bank,Sonali Bank,Sonali Bank,SOCB,State-owned commercial / specialised bank,Dying_Cyrus_-_SOCB_V7__furnished_.xlsx,Sonali Bank — Financial Dataset (1972- 2026),1972,2026,1
