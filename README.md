@@ -5,7 +5,7 @@
 <h1 align="center">DyingCyrus-DB</h1>
 
 <p align="center">
-  <b>Bangladesh Bank Financial Database — by Ow1nomics</b><br>
+  <b>Bangladeshi State Owned Commercial Bank & 11 Commercial Bank Financial Database — by Ow1nomics</b><br>
   17 banks · 1972–2026 · two segments kept apart · a raw layer under everything · every known problem logged
 </p>
 
