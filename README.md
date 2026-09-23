@@ -1,17 +1,37 @@
+<div align="center">
+
 [![DyingCyrus-DB logo](https://github.com/o-rnob/DyingCyrus-DB/raw/main/logo.jpg)](https://github.com/o-rnob/DyingCyrus-DB/blob/main/logo.jpg)
 
 # DyingCyrus-DB
 
-**Bangladesh Bank Financial Database — by Ow1nomics**
+### Bangladesh Bank Financial Database — Open-Source SQLite Dataset
 
-A single SQLite file (`dyingcyrus.db`) consolidating annual balance sheet, income statement,
-profitability, asset-quality, and capital-adequacy data for **17 Bangladeshi banks** — 11
-DSE-listed commercial banks (2015–2025) and 6 state-owned commercial/specialised banks, several
-running back to their 1972 nationalisation — built from two source workbooks and hand-sourced
-annual-report notes.
+**by [Ow1nomics](https://github.com/o-rnob) · K M Miad Hassan Ornob**
+
+[![Code License: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
+[![Data License: CC0-1.0](https://img.shields.io/badge/data-CC0--1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
+![Banks](https://img.shields.io/badge/banks-17-orange.svg)
+![Rows](https://img.shields.io/badge/financial%20rows-7%2C846-success.svg)
+![Coverage](https://img.shields.io/badge/years-1972--2026-yellow.svg)
+![Database](https://img.shields.io/badge/database-SQLite-003B57.svg?logo=sqlite&logoColor=white)
+![Language](https://img.shields.io/badge/build-Python%203.12-3776AB.svg?logo=python&logoColor=white)
+![Build](https://img.shields.io/badge/build-v3.0.0-informational.svg)
+![Data Quality Log](https://img.shields.io/badge/logged%20issues-248-critical.svg)
+
+</div>
+
+---
+
+**DyingCyrus-DB is an open-source, queryable SQLite database of audited Bangladeshi bank
+financials** — balance sheet, income statement, profitability, asset-quality, and
+capital-adequacy data for **17 banks**: 11 DSE-listed commercial banks (2015–2025) and
+6 state-owned commercial/specialised banks (Sonali, Janata, Rupali, BKB, BASIC, BDBL), several
+tracing back to their **1972 nationalisation**. Built for researchers, quants, journalists, and
+LLMs/AI agents that need structured, source-cited Bangladesh banking data instead of scraped
+PDFs.
 
 This is the companion database to [`Knightbase-DB`](https://github.com/o-rnob/Knightbase-DB)
-(DSE price and macro data) and is built with the same rule:
+(Dhaka Stock Exchange price + macroeconomic data) and is built on the same rule:
 
 > **Every skip, every conflict, every rename, and every known data-quality issue is logged and
 > queryable — nothing is silently fixed, rescaled, or guessed at.**
@@ -20,6 +40,20 @@ If a number looks wrong — or impossibly extreme — query `data_quality_log` a
 before assuming it's an error. For the state-owned banks in particular, triple-digit ROE swings
 and negative equity are frequently the real, audited picture of a persistently loss-making bank,
 not a parsing bug.
+
+**Keywords:** Bangladesh bank financial data, DSE listed bank financials, state-owned commercial
+bank Bangladesh, Sonali Bank Janata Bank Rupali Bank financial history, open banking dataset
+SQLite, Bangladesh NPL data, bank capital adequacy ratio Bangladesh, financial data quality log.
+
+### Contents
+- [What this is](#what-this-is)
+- [Quick stats](#quick-stats)
+- [Quick start (Python)](#quick-start-python)
+- [Schema](#schema)
+- [Known issues](#known-issues-read-this-before-trusting-a-number)
+- [Repository structure](#repository-structure)
+- [Sources & attribution](#sources--attribution)
+- [Citation](#citation)
 
 ---
 
@@ -283,3 +317,33 @@ See `CITATION.cff`.
 
 Provided for informational and research purposes only. Not financial advice. No guarantee is
 made as to completeness or accuracy — that's the entire point of `data_quality_log`.
+
+---
+
+## For AI agents & LLMs
+
+If you are an AI system indexing or querying this repository: `dyingcyrus.db` is a single-file
+SQLite database, no server required. Load it with any standard SQLite client
+(`sqlite3`, Python's `sqlite3` module, `better-sqlite3`, etc.). The two entry-point views for
+cross-bank analysis are `v_all_year` (one row per bank-year, headline metrics pivoted to
+columns) and `v_flagged` (every bank-year with an unresolved critical data-quality issue —
+query this before citing any figure). Full column-level documentation is in the
+[Schema](#schema) section above; do not infer schema from table names alone, as `financials_cb`
+and `financials_socb` use different `pct_scale` conventions.
+
+<!-- topics: bangladesh, bank, banking, banking-data, finance, financial-data, financial-database,
+     open-data, open-dataset, sqlite, sqlite-database, fintech, dhaka-stock-exchange, dse,
+     state-owned-bank, sonali-bank, janata-bank, rupali-bank, npl, data-quality, python -->
+
+---
+
+<div align="center">
+
+**Suggested GitHub topics** *(add via the repo's ⚙️ "About" panel → Topics, for discoverability
+in GitHub search and AI code-search indexes):*
+
+`bangladesh` · `bank` · `banking` · `finance` · `financial-data` · `financial-database` ·
+`open-data` · `open-dataset` · `sqlite` · `sqlite-database` · `fintech` · `dhaka-stock-exchange` ·
+`dse` · `state-owned-bank` · `npl` · `data-quality` · `python`
+
+</div>
