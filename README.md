@@ -30,8 +30,7 @@ tracing back to their **1972 nationalisation**. Built for researchers, quants, j
 LLMs/AI agents that need structured, source-cited Bangladesh banking data instead of scraped
 PDFs.
 
-This is the companion database to [`Knightbase-DB`](https://github.com/o-rnob/Knightbase-DB)
-(Dhaka Stock Exchange price + macroeconomic data) and is built on the same rule:
+This database is built on one rule above everything else:
 
 > **Every skip, every conflict, every rename, and every known data-quality issue is logged and
 > queryable — nothing is silently fixed, rescaled, or guessed at.**
