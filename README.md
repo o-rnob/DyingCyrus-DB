@@ -1,266 +1,237 @@
-<p align="center">
-  <img src="logo.jpg" alt="DyingCyrus-DB" width="420">
-</p>
+[![DyingCyrus-DB logo](https://github.com/o-rnob/DyingCyrus-DB/raw/main/logo.jpg)](https://github.com/o-rnob/DyingCyrus-DB/blob/main/logo.jpg)
 
-<h1 align="center">DyingCyrus-DB</h1>
+# DyingCyrus-DB
 
-<p align="center">
-  <b>Bangladeshi State Owned Commercial Banks & 11 Commercial Bank Financial Database — by Ow1nomics</b><br>
-  17 banks · 1972–2026 · two segments kept apart · a raw layer under everything · every known problem logged
-</p>
+**Bangladesh Bank Financial Database — by Ow1nomics**
 
-<p align="center">
-  <a href="#quick-start">Quick start</a> ·
-  <a href="docs/USER_MANUAL.md">User manual</a> ·
-  <a href="docs/SCHEMA.md">Schema</a> ·
-  <a href="docs/DATA_QUALITY.md">Data quality</a> ·
-  <a href="docs/AI_GUIDE.md">Using it with AI</a>
-</p>
+A single SQLite file (`dyingcyrus.db`) consolidating annual balance sheet, income statement,
+profitability, asset-quality, and capital-adequacy data for **17 Bangladeshi banks** — 11
+DSE-listed commercial banks (2015–2025) and 6 state-owned commercial/specialised banks, several
+running back to their 1972 nationalisation — built from two source workbooks and hand-sourced
+annual-report notes.
 
----
+This is the companion database to [`Knightbase-DB`](https://github.com/o-rnob/Knightbase-DB)
+(DSE price and macro data) and is built with the same rule:
 
-A single SQLite file, `dyingcyrus.db`, holding annual balance-sheet,
-income-statement, profitability, asset-quality and capital-adequacy data for
-Bangladeshi banks, in **two segments that are never mixed unless you ask**:
+> **Every skip, every conflict, every rename, and every known data-quality issue is logged and
+> queryable — nothing is silently fixed, rescaled, or guessed at.**
 
-| Segment | Code | Banks | Years | Tables |
-|---|---|---|---|---|
-| **Commercial banks** — private, DSE-listed | `CB` | 11 | 2015–2025 | `financials_cb` · `raw_cb` · `v_cb_year` |
-| **State-owned & specialised banks** | `SOCB` | 6 (Sonali, Janata, Rupali, BASIC, BDBL, Krishi) | **1972**–2026 | `financials_socb` · `raw_socb` · `v_socb_year` |
-
-Two layers, both in the database and both exported:
-
-* **Harmonised layer** (`financials_*`, `v_*_year`) — 22 metric keys behind 30+
-  raw labels, percentages restated so they are comparable, every cell traceable.
-* **Raw layer** (`raw_*`, `data/csv/*/raw/`) — every non-empty cell of every
-  source sheet, **exactly as read**. No metric mapping, no unit correction, no
-  percent detection. The harmonised layer is built on top of it, so nothing is
-  lossy: if you disagree with a harmonisation choice, go to the raw layer.
-
-The house rule, inherited from [`KnightBase-DB`](https://github.com/o-rnob/Knightbase-DB)
-and its CSV sibling [`o-rnob/Datanest`](https://github.com/o-rnob/Datanest):
-
-> **Every skip, conflict, rename and known data-quality issue is logged and
-> queryable — nothing is silently fixed, rescaled or guessed at.**
+If a number looks wrong — or impossibly extreme — query `data_quality_log` and `source_notes`
+before assuming it's an error. For the state-owned banks in particular, triple-digit ROE swings
+and negative equity are frequently the real, audited picture of a persistently loss-making bank,
+not a parsing bug.
 
 ---
 
-## How complete is it?
+## What this is
 
-The headline is **coverage of the five core series** — total assets, gross loans,
-deposits, shareholders' equity and net profit after tax — measured inside each
-bank's compiled range (first to last year with any core figure).
+`dyingcyrus.db` merges two segments into one schema:
 
-### State-owned & specialised banks (`SOCB`)
+- **CB (Commercial Banks)** — 11 DSE-listed private commercial banks, fiscal years 2015–2025,
+  sourced from a single standardised workbook.
+- **SOCB (State-Owned Commercial / Specialised Banks)** — Sonali Bank, Janata Bank PLC, and
+  Rupali Bank PLC (all founded 1972, at nationalisation), Bangladesh Krishi Bank (est. 1973),
+  BASIC Bank PLC (from 1989), and Bangladesh Development Bank PLC (from 2010) — hand-compiled
+  from each bank's own audited annual reports, one bank at a time, with per-bank source notes
+  documenting exactly which annual report each figure came from and why.
 
-| Bank | Compiled range | Years | Core-5 complete | Years with all five |
-|---|---|---|---|---|
-| Janata Bank PLC | 1972–2024 | 53 | **100.0%** | 53 |
-| BASIC Bank PLC | 1989–2023 | 35 | **100.0%** | 35 |
-| Bangladesh Krishi Bank (BKB) | 2010–2025 | 16 | **100.0%** | 16 |
-| Bangladesh Development Bank PLC (BDBL) | 2010–2024 | 15 | **100.0%** | 15 |
-| Sonali Bank | 1972–2025 | 54 | **99.3%** | 52 |
-| Rupali Bank PLC | 1972–2025 | 54 | **50.7%** | 17 |
-
-Five of the six are **effectively complete** for their whole span — Sonali,
-Janata and Rupali reach back to **1972**, giving 50+ years of fundamentals.
-**Rupali is the honest exception** (about half), and its own `source_notes`
-say why: 1972–1996 carry only deposits, loans and pre-tax profit; 1997–2007 are
-missing from the supplied annual reports; and net profit after tax exists only
-from 2009. Its full core-five series runs 2009–2025. Krishi Bank's sheet has year columns back to 1973, but its data starts
-in **2010**; the earlier columns are empty by design.
-
-### Commercial banks (`CB`)
-
-| Bank | Compiled range | Years | Core-5 complete | Years with all five |
-|---|---|---|---|---|
-| BRAC Bank PLC | 2015–2025 | 11 | **100.0%** | 11 |
-| City Bank PLC | 2015–2025 | 11 | **100.0%** | 11 |
-| Dutch-Bangla Bank PLC | 2015–2025 | 11 | **100.0%** | 11 |
-| IFIC Bank PLC | 2015–2025 | 11 | **100.0%** | 11 |
-| Mercantile Bank PLC | 2015–2025 | 11 | **100.0%** | 11 |
-| Prime Bank PLC | 2015–2025 | 11 | **100.0%** | 11 |
-| Southeast Bank PLC | 2015–2025 | 11 | **100.0%** | 11 |
-| Pubali Bank PLC | 2016–2025 | 10 | **100.0%** | 10 |
-| Mutual Trust Bank PLC | 2015–2025 | 11 | **98.2%** | 10 |
-| Bank Asia PLC | 2015–2025 | 11 | **96.4%** | 10 |
-| Eastern Bank PLC | 2015–2025 | 11 | **90.9%** | 10 |
-
-The `bank_coverage` table has these figures plus a second measure
-(`core5_pct_sheet`) that counts every year column on the sheet, including empty
-ones before a bank's data begins.
-
-> **About the 2,497 empty cells.** Of 7,846 harmonised cells, 2,497 carry
-> no figure. Most are year columns *before* a bank's data begins, or metrics a
-> sheet simply does not report. They are `NULL`, never zero. That number
-> describes the size of the grid, not the quality of the data — use the coverage
-> tables above.
+The SOCB segment is the harder, higher-value half of this dataset: audited annual reports for
+Bangladesh's state banks are not standardised, several carry qualified audit opinions for
+persistent capital shortfalls, and multiple years had to be cross-checked against a later
+report's comparative column because the original year's report wasn't available. All of that
+reconciliation work is preserved in `source_notes`, not collapsed into a single clean number.
 
 ---
 
-## Quick start
+## Quick stats
 
-### I don't code
-
-Download `dyingcyrus.db`, install the free
-[DB Browser for SQLite](https://sqlitebrowser.org), open the file, click
-**Browse Data**, and pick **`v_cb_year`** (commercial banks) or **`v_socb_year`**
-(state-owned banks). One row per bank per year, every headline figure in
-comparable units.
-→ [step-by-step](docs/USER_MANUAL.md#a-no-code)
-
-### I use Excel or Google Sheets
-
-Open `data/csv/cb/cb_bank_year.csv` or `data/csv/socb/socb_bank_year.csv`.
-Nothing else required.
-→ [step-by-step](docs/USER_MANUAL.md#b-excel-and-google-sheets)
-
-### I use SQL
-
-```sql
-sqlite3 dyingcyrus.db
-
-SELECT display_name, total_assets_tk_mn, roe_pct, npl_pct
-FROM v_cb_year WHERE year = 2025
-ORDER BY total_assets_tk_mn DESC;
-```
-→ [cookbook](examples/queries.sql)
-
-### I use Python
-
-```python
-from dyingcyrus import DyingCyrus          # ships in the repo, no install needed
-
-db = DyingCyrus("dyingcyrus.db")
-
-db.series("city bank", "roe_pct")          # one metric over time
-db.compare("total_assets", 2025, "CB")     # ranked league table, one segment
-db.panel("SOCB")                           # tidy panel for analysis
-db.coverage()                              # how complete is each bank?
-db.issues("mutual trust")                  # known problems with this bank
-db.raw("sonali", row=6)                    # the untouched source cells
-db.provenance("sonali", "total_assets", 2024)   # trace a number to its cell
-```
-
-The API resolves a bank name to its segment and reads the right tables for you.
-Or straight pandas:
-
-```python
-import sqlite3, pandas as pd
-df = pd.read_sql("SELECT * FROM v_socb_year", sqlite3.connect("dyingcyrus.db"))
-```
-
-Run `python3 examples/quickstart.py` for a guided tour.
-→ [step-by-step](docs/USER_MANUAL.md#d-python)
-
-### I want to ask an AI about it
-
-Upload `data/csv/cb/cb_bank_year.csv`, `data/csv/socb/socb_bank_year.csv` and
-`data/csv/data_quality_log.csv`, then paste the
-[ready-made primer](docs/AI_GUIDE.md#3-the-primer--paste-this-first) as your
-first message. It tells the model what it cannot guess: the percentage-scale
-trap, the negative-equity ROE trap, and which figures are known to be unreliable.
-→ [full AI guide](docs/AI_GUIDE.md)
-
-R, JavaScript, Stata, Power BI and Tableau are covered in the
-[user manual](docs/USER_MANUAL.md).
-
----
-
-## Two traps you must know about
-
-### 1. The source sheets do not agree on how to write a percentage
-
-Some banks publish ROE as `17.3`. Others publish `0.173` for the same quantity,
-with the unit column saying `%` in both cases. Compared raw, they are wrong by 100×.
-
-* **`value_numeric`** holds the source figure exactly as the cell had it.
-* **`value_pct_points`** holds the same figure restated in percentage points.
-* **`pct_scale`** records how that was decided — evidence, not a magnitude guess.
-  Where a ratio can be rebuilt from its own inputs on the same sheet (ROA from
-  profit ÷ assets, ROE from profit ÷ equity, loan-deposit from loans ÷ deposits,
-  NPL% from NPL ÷ loans), both conventions are scored over at least three years
-  and the better fit wins. Ratios that cannot be rebuilt inherit the convention
-  the rest of that bank's sheet demonstrably uses, tagged `_inferred`.
-
-**Use `value_pct_points`, or just use the `v_*_year` views, which apply the rule.**
-
-### 2. ROE on negative equity is meaningless
-
-ROE = profit ÷ equity. When equity is **negative**, a *loss* divided by negative
-equity prints as a **positive** ROE. Bangladesh Krishi Bank has reported negative
-equity every year since 2010 (about −Tk 275 bn by 2025) and a net loss in every
-year since 2011 — yet its printed ROE is a positive 5% to 65% while the bank is
-deeply insolvent. Sonali, Janata, Rupali (one year each) and BASIC (2021–2023) have the
-same effect in a few years. These are logged as `roe_on_negative_equity`
-(critical); `db.series(..., "roe_pct")` adds a `negative_equity` flag to each
-year. **Never rank, average or chart these ROE values as if higher were better.**
-Use net profit and equity in Tk mn.
-
----
-
-## Known issues — read before trusting a number
-
-Full detail for all 248 log entries is in `data_quality_log` and
-[docs/DATA_QUALITY.md](docs/DATA_QUALITY.md).
-
-**`cross_bank_identical_value` (90, critical).** Eastern Bank PLC and Mutual
-Trust Bank PLC report **byte-identical figures for 2015 and 2017–2020** across
-nine metrics: total assets, gross loans, deposits, equity, net interest income,
-non-interest income, NPAT, EPS and NPL amount. Not plausible for raw Tk-mn
-balance-sheet numbers; almost certainly a copy/paste error in the source
-workbook. MTB's 2021–2025 figures are distinct and look fine. **Treat Mutual
-Trust Bank's 2015 and 2017–2020 figures as unverified** until checked against its
-annual reports.
-
-**`percent_stored_as_fraction` (107, critical).** Thirteen banks store at least
-one `%` metric as a decimal fraction. Handled as above — logged, never silently
-rescaled.
-
-**`roe_on_negative_equity` (5, critical).** See trap 2.
-
-**`duplicate_table_on_sheet` + `misaligned_duplicate_row` (3, critical).** The
-Eastern Bank sheet contains its whole data table twice (rows 14 and 48), and
-rows 74–75 are shifted one column left and appear divided by 100. All copies are
-loaded; `table_instance = 1` is authoritative and is the only one the views use.
-
-**`reported_ratio_not_reproducible` (1, warning).** IFIC Bank's 2025 ROE of
-−139.59% does not reproduce from its own net profit and closing equity, which
-rebuild to −452.73% — equity collapsed during the year and the reported figure
-appears to use average equity. That only one such case exists across 17 banks is
-a fair sign the rest is internally consistent.
-
-**`value_outside_plausible_range` (9, warning).** Ratios outside a generous
-sanity band. Most are **real**: Krishi Bank's capital adequacy ratio really does
-run to about −133% and its cost-to-income ratio really does exceed several
-hundred percent, because its net interest income is deeply negative. The bank's
-own `source_notes` say so. Check them before calling anything a mistake.
-
----
-
-## Schema at a glance
-
-```
-banks ──┬── financials_cb / financials_socb   harmonised cells, tidy/long, with provenance
-        ├── raw_cb / raw_socb                 every source cell, exactly as read
-        ├── bank_coverage                     completeness of the core series, per bank
-        ├── bank_summary_stats                the summary block printed on each sheet
-        ├── source_notes                      the compiler's sourcing notes, verbatim
-        └── data_quality_log                  every known problem, with severity + evidence
-metric_catalog                                metric dictionary, per segment
-build_metadata                                version, timestamp, row counts, licences
-```
-
-Views do the thinking for you:
-
-| View | Use it for |
+| | |
 |---|---|
-| `v_cb_year` · `v_socb_year` | one row per bank-year, percentages already comparable — **start here** |
-| `v_cb_financials` · `v_socb_financials` | authoritative rows only, joined to bank names |
-| `v_all_year` | **both segments stacked** — only when you deliberately want that |
-| `v_flagged` | anti-join to drop every bank-year carrying a critical flag |
+| Banks | 17 (11 CB, 6 SOCB) |
+| Year span | 1972–2026 (CB: 2015–2025 · SOCB: per-bank, see coverage table below) |
+| Financial line-item rows | 7,846 (`financials_cb`: 2,530 · `financials_socb`: 5,316) |
+| Distinct standardised metrics | 20 (CB) / 21 (SOCB), catalogued in `metric_catalog` |
+| Raw source cells preserved | 6,983 (`raw_cb`: 3,425 · `raw_socb`: 3,558) |
+| Missing cells | 2,497 — stored as `NULL`, never zero-filled (143 CB, 2,354 SOCB) |
+| Per-bank source notes | 35 entries across 6 SOCB banks, citing the exact annual report per figure |
+| Data quality log entries | 248 (205 critical, 10 warning, 33 info) |
+| Build version | 3.0.0, built 2026-09-20 |
 
-Column-by-column reference: [docs/SCHEMA.md](docs/SCHEMA.md).
+### Per-bank coverage
+
+**SOCB** — `core5` = the five headline metrics (total assets, gross loans, deposits, equity,
+net profit after tax); `all` = every cell on that bank's sheet.
+
+| Bank | Years compiled | Core-5 complete | All-cells complete |
+|---|---|---|---|
+| Sonali Bank | 1972–2025 (54 yrs) | 99.3% | 74.4% |
+| Janata Bank PLC | 1972–2024 (53 yrs) | 100% | 65.3% |
+| Rupali Bank PLC | 1972–2025 (54 yrs) | **50.7%** | 37.3% |
+| Bangladesh Krishi Bank (BKB) | 2010–2025 (16 yrs) | 100% | 27.4% |
+| BASIC Bank PLC | 1989–2023 (35 yrs) | 100% | 70.2% |
+| Bangladesh Development Bank PLC (BDBL) | 2010–2024 (15 yrs) | 100% | 87.6% |
+
+Rupali is the one SOCB bank still short on its headline five metrics — see Known Issues below.
+
+**CB** — all 11 banks, 2015–2025 (Pubali from 2016). Core-5 completeness ranges 90.9%–100%;
+all-cells completeness ranges 88.5%–99.0%. City Bank, BRAC Bank, Mercantile Bank, and
+Southeast Bank are at 100%/99%; Eastern Bank PLC is the lowest at 90.9% core-5 / 89.0% all-cells
+(see the duplicate-table and misaligned-row issues below).
+
+---
+
+## Quick start (Python)
+
+```python
+import sqlite3
+import pandas as pd
+
+conn = sqlite3.connect("dyingcyrus.db")
+
+# ROE trend for one SOCB bank across its full audited history
+roe = pd.read_sql("""
+    SELECT year, value_numeric FROM financials_socb
+    WHERE bank_id = 'sonali_bank' AND metric_std = 'roe_pct' AND table_instance = 1
+    ORDER BY year
+""", conn)
+
+# Compare Total Assets across every bank (CB + SOCB) for 2024, via the pre-built view
+assets_2024 = pd.read_sql("""
+    SELECT segment, display_name, total_assets_tk_mn FROM v_all_year
+    WHERE year = 2024
+    ORDER BY total_assets_tk_mn DESC
+""", conn)
+
+# See every critical-severity issue logged against a bank before trusting its numbers
+issues = pd.read_sql("""
+    SELECT * FROM data_quality_log
+    WHERE bank_id = 'rupali_bank_plc' AND severity = 'critical'
+""", conn)
+
+# Read the actual annual-report source trail for a bank's figures
+notes = pd.read_sql("""
+    SELECT note_index, note_text FROM source_notes
+    WHERE bank_id = 'bangladesh_krishi_bank_bkb' ORDER BY note_index
+""", conn)
+```
+
+---
+
+## Schema
+
+### `banks`
+One row per bank: `bank_id` (slug PK), `display_name`, `sheet_name`, `bank_type` (`CB`/`SOCB`),
+`ownership`, `source_file`, `year_min`/`year_max`, `n_tables` (>1 flags a duplicate table on
+that bank's sheet — see Eastern Bank PLC below).
+
+### `financials_cb` / `financials_socb`
+The two segment-specific tidy/long tables — kept **separate**, not merged, because the two
+source workbooks use different conventions (see `pct_scale` below). One row per (bank,
+table_instance, metric, year):
+
+| column | notes |
+|---|---|
+| `table_instance` | 1 = primary table. >1 = a duplicate table further down the same sheet |
+| `category` | section header, e.g. `BALANCE SHEET`, `ASSET QUALITY`, `DERIVED METRICS (formulas)` |
+| `metric` / `metric_std` | raw label as printed / standardised name used across both segments |
+| `raw_value` | the exact original cell content, stringified — always preserved |
+| `value_numeric` | parsed numeric value, or `NULL` if blank/unparseable |
+| `value_pct_points` | for percentage metrics, normalised to percentage-point scale (see `pct_scale`) |
+| `pct_scale` | `percent_points` / `fraction` / `*_inferred` — tags which convention the *raw* cell used |
+| `value_source` | `native_numeric` / `recovered_from_text` / `missing_marker` / `missing` |
+| `is_estimated` | always 0 in this build — no cell is a Claude/model estimate, only recovered or left null |
+| `source_row` / `source_col` | exact Excel location, for traceability back to `raw_cb`/`raw_socb` |
+
+### `raw_cb` / `raw_socb`
+Every source cell as originally typed, before any parsing — `cell_text` + `cell_type`
+(`float`/`int`/`str`). This is the audit trail underneath `financials_*`: if you don't trust a
+parsed value, this is where you check what was actually in the workbook.
+
+### `bank_summary_stats`
+Per-bank summary-block figures pulled straight off each sheet (99 rows) — Mean ROE, CAGR, and
+similar bank-reported summary statistics, long format.
+
+### `source_notes`
+35 free-text notes across the 6 SOCB banks, each citing which specific annual report a figure
+came from, restatements between reports, definitional choices, and known gaps in the source
+documents. This is the closest thing to a citation trail a hand-compiled dataset like this can
+have — read it before disputing a SOCB number.
+
+### `metric_catalog`
+41 rows: one per (segment, standardised metric), with `canonical_unit`, `n_banks`, and
+`n_values` — the fastest way to see which metrics have full coverage and which are thin
+(e.g. `profit_before_tax` and `provision_maintained` are populated for only 1 SOCB bank each).
+
+### `bank_coverage`
+Per-bank completeness, computed two ways: `core5_*` (the five headline balance-sheet/income
+metrics) and `all_*` (every cell on the sheet). This is the source of the coverage table above.
+
+### `data_quality_log`
+248 rows: `bank_id`, `metric`, `year` (all nullable — some issues are dataset-wide),
+`issue` (machine-readable tag), `detail` (full explanation), `severity`
+(`info`/`warning`/`critical`).
+
+### Views
+`v_cb_financials`, `v_socb_financials` — segment financials joined to `banks`, filtered to
+`table_instance = 1`. `v_cb_year`, `v_socb_year`, `v_all_year` — one row per bank-year with
+headline metrics pivoted into columns. `v_flagged` — every distinct (bank, year, issue) with a
+critical-severity data quality flag, for a fast "what should I not trust" query.
+
+---
+
+## Known issues (read this before trusting a number)
+
+Full detail for all 248 entries is in `data_quality_log`. The issue types found by the build:
+
+**`percent_stored_as_fraction` (107 entries, critical).** ROA%/ROE%/CAR% and similar ratios are
+stored as decimal fractions (e.g. `0.173`) on some banks' sheets and as percentage-points
+(`17.3`) on others — inconsistent both within and across the CB and SOCB segments (13 of 17
+banks affected). `value_pct_points` normalises this for you, but `value_numeric`/`raw_value`
+keep the original convention — **check `pct_scale` before comparing ratios across banks.**
+
+**`cross_bank_identical_value` (90 entries, critical) — Eastern Bank PLC vs. Mutual Trust Bank
+PLC.** For 2015–2020, the two banks report byte-identical figures across 9 metrics and 45
+(metric, year) cells — total assets, deposits, loans, EPS, and more. Not a plausible coincidence
+for raw balance-sheet numbers; almost certainly a copy/paste error in the source workbook.
+**Treat both banks' 2015–2020 balance-sheet and income-statement figures as unverified** until
+checked against their own published annual reports.
+
+**`roe_on_negative_equity` (5 entries, critical).** Bangladesh Krishi Bank (16 years,
+2010–2025), BASIC Bank PLC (3 years, 2021–2023), and one year each for Janata, Rupali, and
+Sonali report negative shareholders' equity in years an ROE is also printed. With negative
+equity, ROE = profit/equity flips sign — a loss shows as a *positive* ROE. These figures are
+arithmetically correct but economically meaningless; **use net profit and equity in Tk mn
+instead of ranking or averaging the printed ROE.**
+
+**`value_outside_plausible_range` (9 entries, warning).** Ratios like Sonali Bank's 1982 ROE
+(378.7%) or BASIC Bank's 2021 ROE (690.5%) sit outside a sanity band. Not altered — for the
+state-owned banks these extremes are frequently **real**, driven by deeply negative capital or
+negative net interest income. Check `source_notes` for that bank before calling it an error.
+
+**`reported_ratio_not_reproducible` (1 entry, warning) — IFIC Bank PLC.** 2025 ROE is printed
+as -139.59% but recomputes to -452.73% from the same sheet's own inputs (69% apart) — most
+likely a reporting-basis difference (average vs. closing denominator), not an error. Both
+figures are preserved; check the annual report before quoting either.
+
+**`misaligned_duplicate_row` (2 entries, critical) — Eastern Bank PLC.** Two rows on the Eastern
+Bank sheet are shifted one column left relative to the header, with values also appearing
+rescaled (÷100) versus the aligned copy of the same metric. Loaded with the shift corrected,
+marked `table_instance = 2`.
+
+**`duplicate_table_on_sheet` (1 entry, critical) — Eastern Bank PLC.** The sheet contains the
+full metric/unit table twice (header rows 14 and 48). Both copies are loaded; `table_instance =
+1` is the authoritative one and the only instance exposed by the `v_*` views.
+
+**`text_cell_with_recoverable_number` (5 entries, info), `missing_marker_cell` (14, info),
+`empty_year_column` (7, info), `bank_name_normalised` (6, info).** Footnote-marked numbers
+recovered with the marker kept in `raw_value`; explicit "no data" markers vs. genuinely blank
+cells distinguished; a handful of blank year columns (e.g. BDBL 2025–2026, pending an annual
+report); minor display-name normalisations logged for traceability.
+
+**Not a logged issue, but worth knowing: `is_estimated` is 0 for all 5,316 SOCB rows and 2,530
+CB rows.** No cell in this database is a model-generated estimate — every non-null figure was
+either read directly from a source document or recovered from a footnoted/text cell; everything
+else is `NULL`.
 
 ---
 
@@ -268,80 +239,47 @@ Column-by-column reference: [docs/SCHEMA.md](docs/SCHEMA.md).
 
 ```
 DyingCyrus-DB/
-├── dyingcyrus.db                  the database (also on the Releases page)
-├── dyingcyrus.py                  zero-dependency Python API
-├── build_db.py                    the ETL — rebuilds everything from data/raw/
+├── logo.jpg                                    # repo cover image
+├── build_db.py                                 # ETL script — rebuilds dyingcyrus.db from scratch
+├── dyingcyrus.db                               # the SQLite database (output of build_db.py)
 ├── requirements.txt
-├── logo.jpg
 ├── data/
-│   ├── raw/                       the two source workbooks, untouched
-│   ├── csv/
-│   │   ├── banks.csv  bank_coverage.csv  bank_summary_stats.csv
-│   │   ├── source_notes.csv  metric_catalog.csv  data_quality_log.csv
-│   │   ├── cb/                    commercial banks
-│   │   │   ├── cb_bank_year.csv       one row per bank-year — start here
-│   │   │   ├── cb_long.csv            every harmonised cell, with provenance
-│   │   │   ├── per_bank/              one wide CSV per bank
-│   │   │   └── raw/                   one CSV per bank mirroring the sheet cell-for-cell
-│   │   └── socb/                  state-owned & specialised banks (same layout)
-│   └── json/                      banks, coverage, cb/socb bank_year, quality log, notes
-├── docs/
-│   ├── USER_MANUAL.md             step-by-step for every kind of user
-│   ├── SCHEMA.md                  full column reference
-│   ├── DATA_QUALITY.md            every issue tag explained
-│   ├── AI_GUIDE.md                prompts, primer, and what AI gets wrong
-│   └── CHANGELOG.md
-├── examples/
-│   ├── quickstart.py              runnable tour, standard library only
-│   └── queries.sql                copy-paste SQL cookbook
+│   ├── raw/
+│   │   ├── DATASET_11_BANKS_2025-2015_.xlsx         # CB source workbook, untouched
+│   │   └── Dying_Cyrus_-_SOCB_V7__furnished_.xlsx   # SOCB source workbook, untouched
+│   └── csv/                                    # long/wide exports of financials_* and data_quality_log
 ├── CITATION.cff
-└── LICENSE
+├── LICENSE
+└── README.md
 ```
 
----
-
-## Rebuilding from source
+Rebuild anytime with:
 
 ```bash
 pip install -r requirements.txt
 python3 build_db.py
 ```
 
-This rewrites the database and every CSV and JSON export from the workbooks in
-`data/raw/`, then prints row and issue counts. It is deterministic apart from the
-build timestamp.
-
-To add a bank: drop its workbook into `data/raw/`, add an entry to `SOURCES` at
-the top of `build_db.py` with `"bank_type": "CB"` or `"SOCB"`, re-run. The parser
-finds the `Metric | Unit` header row itself and reads the years from the header,
-so any sheet laid out like the existing ones needs no further code.
-
 ---
 
-## Sources and attribution
+## Sources & attribution
 
-Figures are compiled from the published annual reports and audited financial
-statements of each bank. The state-owned-bank sheets carry detailed per-bank
-sourcing notes — which annual report each year came from, where a later report
-restated an earlier one, and which version was used. Those notes are in the
-`source_notes` table and `data/csv/source_notes.csv`; **read them before building
-anything on the SOCB figures**.
+CB figures are compiled from the standardised 11-bank workbook. SOCB figures are hand-compiled,
+bank by bank, from each institution's own audited annual reports and auditors' reports — the
+specific report and page/table used for every figure is logged in `source_notes`. Always
+cross-check against a bank's official disclosures before using this data for investment,
+research, or policy analysis — especially given the Eastern Bank / Mutual Trust Bank overlap
+and the SOCB qualified-audit-opinion years noted above.
 
-Always cross-check against a bank's official disclosures before using this data
-for investment or research decisions — especially the Mutual Trust / Eastern
-overlap noted above.
-
-The **code and schema** in this repository are MIT licensed (see `LICENSE`).
-The **underlying data** follows the same terms as the source
-[`o-rnob/Datanest`](https://github.com/o-rnob/Datanest) repository: CC0 1.0 Universal.
+This repository's **code and schema** are MIT licensed (see `LICENSE`). The underlying **data**
+follows the same CC0 1.0 Universal terms as the companion [`Datanest`](https://github.com/o-rnob/Datanest)
+repository.
 
 ## Citation
 
-See `CITATION.cff`, or cite the build timestamp from `build_metadata` alongside
-the release tag.
+See `CITATION.cff`.
 
 ## Disclaimer
 
-Provided for informational and research purposes only. Not financial advice. No
-guarantee is made as to completeness or accuracy — that is the entire point of
-`data_quality_log`.
+Provided for informational and research purposes only. Not financial advice. No guarantee is
+made as to completeness or accuracy — that's the entire point of `data_quality_log`.
