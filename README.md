@@ -46,6 +46,8 @@ bank Bangladesh, Sonali Bank Janata Bank Rupali Bank financial history, open ban
 SQLite, Bangladesh NPL data, bank capital adequacy ratio Bangladesh, financial data quality log.
 
 ### Contents
+- [For non-technical readers](#for-non-technical-readers-no-sql-no-python)
+- [How this gets found](#how-this-gets-found)
 - [What this is](#what-this-is)
 - [Quick stats](#quick-stats)
 - [Quick start (Python)](#quick-start-python)
@@ -54,6 +56,30 @@ SQLite, Bangladesh NPL data, bank capital adequacy ratio Bangladesh, financial d
 - [Repository structure](#repository-structure)
 - [Sources & attribution](#sources--attribution)
 - [Citation](#citation)
+
+---
+
+## For non-technical readers (no SQL, no Python)
+
+You don't need to code to look at this data.
+
+1. **Download [DB Browser for SQLite](https://sqlitebrowser.org/)** — free, no install expertise needed, works on Windows/Mac/Linux.
+2. **Open `dyingcyrus.db`** with it (File → Open Database).
+3. Click the **"Browse Data"** tab, pick a table from the dropdown (start with `financials_cb` or `financials_socb`), and scroll/filter like a spreadsheet.
+4. To ask a specific question (e.g. "Sonali Bank's total assets by year"), click **"Execute SQL"**, paste one of the SQL queries from [Quick start](#quick-start-python) below (just the text inside the triple quotes — skip the Python parts), and hit the ▶ run button. Results appear as a sortable, exportable table.
+5. To get data into Excel without any tool at all: the pre-exported files already sitting in `data/csv/` in this repo (see [Repository structure](#repository-structure)) open directly in Excel or Google Sheets — including `data_quality_log.csv`, the same issue list described below, already flattened into a spreadsheet.
+
+---
+
+## How this gets found
+
+A practical, honest answer — no magic bullets:
+
+- **By people, on Google/Bing:** GitHub READMEs are indexed like any web page. The plain-language headers and the keyword line under the title are what search engines can actually match against — not the SQL schema, which reads as gibberish to a search index.
+- **By people, on GitHub's own search:** driven by the repo's **Topics** tags and its one-line **"About" description**, set from the repo page's ⚙️ (top-right, next to "About") — that's separate from this README and currently just holds GitHub's auto-generated sentence. Worth changing it to something like *"Open-source SQLite database of audited financials for 17 Bangladeshi banks, 1972–2026, with a full data-quality log."*
+- **By AI coding agents (Claude Code, Copilot, Cursor, etc.):** these read the README directly the moment they open the repo. The [For AI agents & LLMs](#for-ai-agents--llms) section further down exists specifically so an agent knows which table or view to query first, instead of guessing at column names. This already works, no extra setup needed.
+- **By AI web-search tools (ChatGPT browsing, Perplexity, Claude with search, etc.):** these generally piggyback on the same search indexes as Google — there's no separate "AI-only" registry that guarantees a repo gets pulled into an answer. Badges and keywords help ranking; they don't force discovery.
+- **What would go further, if you want it:** listing this on **Hugging Face Datasets** or **Kaggle** — both are actively crawled by AI-search and AI-training pipelines, and both give non-coders a browsable, no-install web view of the data. Getting it into **Google Dataset Search** specifically requires a hosted page (not a raw GitHub README) carrying `schema.org/Dataset` markup — doable via GitHub Pages. Say the word and I'll set either one up.
 
 ---
 
